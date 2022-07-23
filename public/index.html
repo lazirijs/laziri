@@ -1,0 +1,186 @@
+<script>
+  if (window.location.hostname !== "laziri.com") {
+    setTimeout(() => {document.location.href = "https://www.laziri.com";},250);
+  }
+</script>
+<!DOCTYPE html>
+<html id="theme" lang="ar" dir="rtl" translate="no">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="preload" href="./img/content/covid.jpg" as="image">
+    <link rel="preload" href="./img/content/stores.jpg" as="image">
+    <link rel="preload" href="./img/content/home.jpg" as="image">
+    <link rel="preload" href="./img/content/order.jpg" as="image">
+    <meta name="description" content="Laziri" />
+    <title>Laziri</title>
+    <style>
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      * {
+        user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-tap-highlight-color: #288cff00;
+      }
+    </style>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="mobile-web-app-capable" content="yes">
+  </head>
+  <body class="scroll-smooth light font-general break-words">
+    <script>
+
+      let app = document.querySelector("html");
+
+      if ((localStorage.language == "fr") || (!localStorage.language && navigator.languages && navigator.languages[0] == "fr")) {
+        app.lang = "fr";
+        app.dir = "ltr";
+        localStorage.language = "fr";
+      } else {
+        localStorage.language = "ar";
+      }
+
+      const getOS = () => {
+        class DetectOS {
+          constructor() {
+            this.OS = this.searchString(this.dataOS());
+          }
+
+          searchString(data) {
+            for (let i = 0; i < data.length; i++) {
+              let dataString = data[i].string,
+                dataProp = data[i].prop;
+              if (dataString) {
+                if (dataString.indexOf(data[i].subString) !== -1) {
+                  return data[i].identity;
+                }
+              } else if (dataProp) {
+                return data[i].identity;
+              }
+            }
+          }
+
+          dataOS() {
+            return [
+              {
+                string: navigator.platform,
+                subString: "Win",
+                identity: "Windows",
+              },
+              {
+                string: navigator.platform,
+                subString: "Mac",
+                identity: "macOS",
+              },
+              {
+                string: navigator.userAgent,
+                subString: "iPhone",
+                identity: "iOS",
+              },
+              {
+                string: navigator.userAgent,
+                subString: "iPad",
+                identity: "iOS",
+              },
+              {
+                string: navigator.userAgent,
+                subString: "iPod",
+                identity: "iOS",
+              },
+              {
+                string: navigator.userAgent,
+                subString: "Android",
+                identity: "Android",
+              },
+              {
+                string: navigator.platform,
+                subString: "Linux",
+                identity: "Linux",
+              },
+            ];
+          }
+        }
+        return new DetectOS();
+      };
+
+      const OS = getOS().OS;
+      const dvs = ["iOS", "Android", "Linux"];
+
+      if (!dvs.includes(OS)) {
+        document.querySelector("body").innerHTML = 
+        `<div dir="ltr" class="w-full h-full fixed g-center text-center">
+          <div class="grid-1">
+            <h1 class="text-title tracking-wide text-lg">Laziri not yet available on this device</h1>
+            <h2 class="text-dis">Follow us on Facebook</h2>
+            <a
+              href="https://www.fb.com/laziri.fb" 
+              class="btn w-6/12 bg-blue-400 text-white tracking-wide font-medium m-auto"
+            >
+              <div class="btnTxt m-auto">
+                Facebook
+              </div>
+            </a>
+            <h4 class="text-sub">available on your phone</h4>
+          </div>
+        </div>`;
+      } else {
+        document.querySelector("body").innerHTML = '<div id="app"></div>';
+      }
+
+      let theme = app.classList;
+      
+      if (localStorage.theme == "dark") {
+        if (!theme.contains("dark")) {
+          theme.add("dark");
+        }
+      } else if (!localStorage.theme) {
+
+        const change = (defaultTheme) => {
+          if (defaultTheme == "dark") {
+            if (!theme.contains("dark")) {
+              theme.add("dark");
+            }
+          } else if (theme.contains("dark")) {
+            theme.remove("dark");
+          }
+        };
+        
+        let dark = window.matchMedia("(prefers-color-scheme: dark)");
+        change(dark.matches?"dark":"light");
+        dark.addEventListener("change", event => {
+          change(event.matches?"dark":"light");
+        });
+      }
+
+    </script>
+    <noscript>
+      <div dir="ltr" class="style">
+        <h1 style="width: 65%;">
+          We're sorry but Laziri doesn't work without JavaScript enabled.
+          Please enable it to continue.
+        </h1>
+      </div>
+      <style>
+        .style {
+          position: fixed;
+          display: grid;
+          place-items: center;
+          text-align: center;
+          height: 100%;
+          width: 100%;
+        }
+      </style>
+    </noscript>
+  </body>
+</html>
