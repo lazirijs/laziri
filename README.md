@@ -1,6 +1,6 @@
 # laziri-test
 
-####[laziri.com](www.laziri.com) is a webapp that brings together all the stores available in your area and allows you to buy from them directly via your phone
+[laziri.com](www.laziri.com) is a webapp that brings together all the stores available in your area and allows you to buy from them directly via your phone
 
 ## Project setup
 ```
