@@ -8,7 +8,7 @@ import "firebase/messaging";
 import * as geofirestore from "geofirestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCyQakgCxDFYw31wXdSO4G39cIfumf4-vw",
+  apiKey: "firebase-project-api-key",
   authDomain: "laziri.com",
   databaseURL:
     "https://projects-cd348-default-rtdb.europe-west1.firebasedatabase.app",
